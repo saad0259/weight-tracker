@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "728815630711",
+    "project_id": "weight-manager-b42f6",
+    "storage_bucket": "weight-manager-b42f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728815630711:android:b27b462551e697e7274972",
+        "android_client_info": {
+          "package_name": "com.techforgery.weight_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728815630711-mtd80cm822vrsth8vlcnksnc731n46bj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg-hCXYC3b6sn4rNy9TeVkdcgLXaPxufw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728815630711-mtd80cm822vrsth8vlcnksnc731n46bj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
