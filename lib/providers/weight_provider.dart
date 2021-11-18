@@ -11,9 +11,6 @@ class WeightProvider with ChangeNotifier {
   }
 
   Future<void> fetchAndSetData() async {
-    print('-------- refreshing ${_items.length}');
-    print('-------- User ${FB.firebaseAuth.currentUser!.uid}');
-
     if (FB.firebaseAuth.currentUser?.uid == null) {
       return;
     }
@@ -31,8 +28,7 @@ class WeightProvider with ChangeNotifier {
         }
       }
     });
-    print('-------- refreshing ${_items.length}');
-    print('-------- User ${FB.firebaseAuth.currentUser!.uid}');
+
     notifyListeners();
   }
 
