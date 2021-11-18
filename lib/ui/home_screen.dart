@@ -52,13 +52,19 @@ class _HomeScreenState extends State<HomeScreen> {
               color: index.isEven ? Colors.blue.shade100 : Colors.blue.shade200,
               child: ListTile(
                 key: ValueKey(items[index].id),
-                leading: Text(
-                  DateFormat('yMEd').format(items[index].dateCreated.toDate()),
-                  maxLines: 1,
-                  softWrap: false,
-                  style: const TextStyle(
-                    fontSize: 8,
-                  ),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      DateFormat('yMEd')
+                          .format(items[index].dateCreated.toDate()),
+                      maxLines: 1,
+                      softWrap: false,
+                      style: const TextStyle(
+                        fontSize: 8,
+                      ),
+                    ),
+                  ],
                 ),
                 title: Text(
                   '${items[index].weight} kg',
