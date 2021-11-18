@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      key: GlobalKey(),
+      key: ObjectKey(fb.firebaseAuth.currentUser?.uid),
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => WeightProvider(),

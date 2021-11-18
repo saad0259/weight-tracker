@@ -6,29 +6,33 @@ import '../constants/firebase_constants.dart' as FB;
 class WeightProvider with ChangeNotifier {
   final List<Weight> _items = [];
 
-  final _user = FB.firebaseAuth.currentUser;
-
   List<Weight> get items {
     return [..._items];
   }
 
   Future<void> fetchAndSetData() async {
-    if (_user?.uid == null) {
+    print('-------- refreshing ${_items.length}');
+    print('-------- User ${FB.firebaseAuth.currentUser!.uid}');
+
+    if (FB.firebaseAuth.currentUser?.uid == null) {
       return;
     }
 
     _items.clear();
+
     await FB.firebaseFirestore
         .collection('weightData')
         .orderBy('createdAt', descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       for (var doc in querySnapshot.docs) {
-        if (doc['userId'] == _user!.uid) {
+        if (doc['userId'] == FB.firebaseAuth.currentUser!.uid) {
           _items.add(Weight(doc.id, doc['weight'], doc['createdAt']));
         }
       }
     });
+    print('-------- refreshing ${_items.length}');
+    print('-------- User ${FB.firebaseAuth.currentUser!.uid}');
     notifyListeners();
   }
 
@@ -40,13 +44,13 @@ class WeightProvider with ChangeNotifier {
   Future<void> addWeightEntry(String inputWeight) async {
     double weight = double.parse(inputWeight);
 
-    if (_user?.uid == null) {
+    if (FB.firebaseAuth.currentUser?.uid == null) {
       return;
     }
     try {
       final weightEntry =
           await FB.firebaseFirestore.collection('weightData').add({
-        'userId': _user!.uid,
+        'userId': FB.firebaseAuth.currentUser!.uid,
         'weight': weight,
         'createdAt': Timestamp.now(),
       }); // add in firestore

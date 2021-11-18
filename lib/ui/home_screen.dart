@@ -15,13 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-    _refreshData(context);
-  }
-
   Future<void> _refreshData(BuildContext context) async {
     await Provider.of<WeightProvider>(context, listen: false).fetchAndSetData();
+  }
+
+  void initState() {
+    super.initState();
+    print('currrent user ==== ${fb.firebaseAuth.currentUser!.uid}');
+    _refreshData(context);
   }
 
   @override
@@ -51,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
               color: index.isEven ? Colors.blue.shade100 : Colors.blue.shade200,
               child: ListTile(
                 key: ValueKey(items[index].id),
-                leading: Text('today'),
                 title: Text(
                   '${items[index].weight} kg',
                   style: const TextStyle(
