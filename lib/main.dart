@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './ui/home_screen.dart';
 import './providers/weight_provider.dart';
+import './ui/manage_weight/manage_weight_screen.dart';
+import './ui/auth/auth_screen.dart';
+import './constants/firebase_constants.dart' as fb;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -13,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      key: GlobalKey(),
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => WeightProvider(),
@@ -20,8 +27,20 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        home: StreamBuilder(
+          stream: fb.firebaseAuth.authStateChanges(),
+          builder: (ctx, userSnapshot) {
+            print('user found');
+            if (userSnapshot.hasData) {
+              return const HomeScreen();
+            }
+            print('user lost');
+
+            return const AuthScreen();
+          },
+        ),
         routes: {
-          '/': (ctx) => const HomeScreen(),
+          ManageWeightScreen.routeName: (ctx) => const ManageWeightScreen(),
         },
       ),
     );

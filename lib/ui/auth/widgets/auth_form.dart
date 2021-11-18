@@ -178,8 +178,8 @@ class _AuthFormState extends State<AuthForm> {
                                 Theme.of(context).primaryColor),
                             padding: MaterialStateProperty.all(
                                 const EdgeInsets.all(15.0)),
-                            foregroundColor: MaterialStateProperty.all(
-                                Theme.of(context).colorScheme.secondary)),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white)),
                       ),
                     TextButton(
                       child: Text(
